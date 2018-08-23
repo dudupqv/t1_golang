@@ -1,0 +1,30 @@
+grammar org.xtext.example.go.Golang with org.eclipse.xtext.common.Terminals
+
+generate golang "http://www.xtext.org/example/go/Golang"
+
+VarDecl:
+	'var' (specs+=Spec+) |
+	'var' '(' (specs+=Spec+) ')'
+;
+
+Spec:
+	name=ID |
+	',' ID ID '=' expressions+=Expression |
+	',' ID '=' expressions+=Expression |
+	ID ID '=' expressions+=Expression |
+	ID '=' INT |
+	',' ID ',' ID
+;
+
+Expression:
+	ID '(' Sign INT ')' |
+	ID '.' ID '(' Sign INT ')' |
+	ID '[' ID ']' |
+	Sign INT ',' Sign INT |
+	Sign INT |
+	INT
+;
+
+Sign:
+	'-' | '+'
+;
